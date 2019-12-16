@@ -1,0 +1,7 @@
+---
+- name: "Provision authorized keys for {{ hostname }}"
+  authorized_key:
+    user: root
+    state: present
+    key: "{{ item.data }}"
+  with_items: "{{ origin_keys }}"

@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  author: nl2go
+  role_name: hetzner_key
+  description: Manage Hetzner Robot Keys (https://robot.your-server.de/key/index) using Ansible.
+  company: Newsletter2Go GmbH
+  issue_tracker_url: https://github.com/nl2go/ansible-role-hetzner-key/issues
+  license: MIT
+  min_ansible_version: 2.6
+  github_branch: master
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+  galaxy_tags:
+    - hetzner
+    - key
+    - ssh
+dependencies: []

@@ -1,0 +1,4 @@
+---
+- include_tasks: host/main.yml
+  tags:
+    - hetzner-key-host

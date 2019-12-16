@@ -1,0 +1,4 @@
+---
+hetzner_key_webservice_base_url: https://robot-ws.your-server.de
+hetzner_key_webservice_username: robot
+hetzner_key_webservice_password: secret

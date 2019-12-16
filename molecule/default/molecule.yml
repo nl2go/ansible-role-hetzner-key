@@ -1,0 +1,29 @@
+---
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: ubuntu-16
+    image: ubuntu:16.04
+    dockerfile: ../resources/playbooks/Dockerfile.j2
+    groups:
+      - platforms
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      all:
+        hetzner_key_webservice_base_url: http://hetzner-robot:3000
+        hetzner_key_webservice_username: robot
+        hetzner_key_webservice_password: secret
+        hetzner_key_webservice_mock: nl2go/hetzner-robot-api-mock:1.4.0
+  lint:
+    name: ansible-lint
+  playbooks:
+    converge: ../resources/playbooks/playbook.yml
+    cleanup: ../resources/playbooks/cleanup.yml
+verifier:
+  name: ansible
+  lint:
+    name: ansible-lint

@@ -1,0 +1,8 @@
+---
+- name: Get all keys from Hetzner Robot
+  import_tasks: read.yml
+  delegate_to: localhost
+  run_once: yes
+
+- name: Provision Hetzner Robot keys to all hosts
+  import_tasks: update.yml

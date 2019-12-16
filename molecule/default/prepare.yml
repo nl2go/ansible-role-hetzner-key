@@ -1,0 +1,21 @@
+---
+- name: Prepare Hetzner Robot Mock API
+  hosts: localhost
+  tasks:
+    - name: Run Hetzner Robot Mock API Container
+      shell: docker run -d --rm --network molecule --name hetzner-robot {{ hetzner_key_webservice_mock }}
+    - name: Create key
+      uri:
+        url: "{{ hetzner_key_webservice_base_url }}/key"
+        method: POST
+        user: "{{ hetzner_key_webservice_username }}"
+        password: "{{ hetzner_key_webservice_password }}"
+        status_code: 201
+        body:
+          name: Existing Key
+          data: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSkT3A1j89RT/540ghIMHXIVwNlAEM3WtmqVG7YN/wYwtsJ8iCszg4/lXQsfLFx
+          YmEVe8L9atgtMGCi5QdYPl4X/c+5YxFfm88Yjfx+2xEgUdOr864eaI22yaNMQ0AlyilmK+PcSyxKP4dzkf6B5Nsw8lhfB5n9F5md6GHLLjOG
+          uBbHYlesKJKnt2cMzzS90BdRk73qW6wJ+MCUWo+cyBFZVGOzrjJGEcHewOCbVs+IJWBFSi6w1enbKGc+RY9KrnzeDKWWqzYnNofiHGVFAuMx
+          rmZOasqlTIKiC2UK3RmLxZicWiQmPnpnjJRo7pL0oYM9r/sIWzD6i2S9szDy6aZ"
+        force_basic_auth: yes
+        body_format: json
