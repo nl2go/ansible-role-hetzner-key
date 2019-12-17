@@ -1,0 +1,51 @@
+---
+- name: Create keys
+  uri:
+    url: "{{ hetzner_key_webservice_base_url }}/key"
+    method: POST
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+    user: "{{ hetzner_key_webservice_username }}"
+    password: "{{ hetzner_key_webservice_password }}"
+    status_code:
+      - 201
+      - 200
+    body: "{{ item | hetzner_key_form_urlencode }}"
+    body_format: raw
+    force_basic_auth: yes
+  changed_when: yes
+  with_items: "{{ change_set_keys['create'] }}"
+  async: "{{ hetzner_key_webservice_concurrent_requests }}"
+  poll: "{{ hetzner_key_webservice_concurrent_poll }}"
+
+- name: Update keys
+  uri:
+    url: "{{ hetzner_key_webservice_base_url }}/key/{{ item['fingerprint'] }}"
+    method: POST
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+    user: "{{ hetzner_key_webservice_username }}"
+    password: "{{ hetzner_key_webservice_password }}"
+    status_code:
+      - 200
+      - 201
+    body: "{{ item | hetzner_key_form_urlencode }}"
+    body_format: raw
+    force_basic_auth: yes
+  changed_when: yes
+  with_items: "{{ change_set_keys['update'] }}"
+  async: "{{ hetzner_key_webservice_concurrent_requests }}"
+  poll: "{{ hetzner_key_webservice_concurrent_poll }}"
+
+- name: Delete keys
+  uri:
+    url: "{{ hetzner_key_webservice_base_url }}/key/{{ item['fingerprint'] }}"
+    method: DELETE
+    user: "{{ hetzner_key_webservice_username }}"
+    password: "{{ hetzner_key_webservice_password }}"
+    status_code: 200
+    force_basic_auth: yes
+  changed_when: yes
+  with_items: "{{ change_set_keys['delete'] }}"
+  async: "{{ hetzner_key_webservice_concurrent_requests }}"
+  poll: "{{ hetzner_key_webservice_concurrent_poll }}"

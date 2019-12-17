@@ -1,0 +1,21 @@
+---
+- name: Get all keys
+  uri:
+    url: "{{ hetzner_key_webservice_base_url }}/key"
+    method: GET
+    user: "{{ hetzner_key_webservice_username }}"
+    password: "{{ hetzner_key_webservice_password }}"
+    status_code: 200
+    force_basic_auth: yes
+  register: get_keys_response
+
+- name: Map origin keys
+  set_fact:
+    origin_keys: "{{ get_keys_response.json |  selectattr('key', 'defined') | map(attribute='key') | list }}"
+
+- name: Compile change set using local and origin vSwitches
+  set_fact:
+    change_set_keys: "{{ hetzner_key_instances | hetzner_key_change_set(origin_keys) }}"
+
+- debug:
+    msg: "{{ change_set_keys }}"

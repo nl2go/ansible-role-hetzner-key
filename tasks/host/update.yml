@@ -1,7 +1,14 @@
 ---
-- name: "Provision authorized keys for {{ hostname }}"
+- name: "Update authorized keys for {{ hostname }}"
   authorized_key:
     user: root
     state: present
     key: "{{ item.data }}"
   with_items: "{{ origin_keys }}"
+
+- name: "Remove authorized keys for {{ hostname }}"
+  authorized_key:
+    user: root
+    state: absent
+    key: "{{ item.data }}"
+  with_items: "{{ hetzner_key_instances |  selectattr('state', 'equalto', 'absent') | list }}"
