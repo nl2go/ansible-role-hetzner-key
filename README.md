@@ -29,6 +29,37 @@ Webservice login name. May be set/changed as described in the section [Change Ac
     
 Webservice password. May be set/changed as described in the section [Change Access Data (Hetzner Wiki)](https://wiki.hetzner.de/index.php/KonsoleH:Zugangsdaten_aendern/en).
 
+    hetzner_key_instances:
+      - name: New Key
+        data: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSkT3A1j89RT/540ghIMHXIVwNlAEM3WtmqVG7YN/wYwtsJ8iCszg4/lXQsfLFx\
+        YmEVe8L9atgtMGCi5QdYPl4X/c+5YxFfm88Yjfx+2xEgUdOr864eaI22yaNMQ0AlyilmK+PcSyxKP4dzkf6B5Nsw8lhfB5n9F5md6GHLLjOG\
+        uBbHYlesKJKnt2cMzzS90BdRk73qW6wJ+MCUWo+cyBFZVGOzrjJGEcHewOCbVs+IJWBFSi6w1enbKGc+RY9KrnzeDKWWqzYnNofiHGVFAuMx\
+        rmZOasqlTIKiC2UK3RmLxZicWiQmPnpnjJRo7pL0oYM9r/sIWzD6i2S9szDy6aZ"
+        
+Keys may be managed by Ansible specifying them within `hetzner_key_instances` variable. Keys are referenced by the `name` attribute.
+Existing keys stored in the [Hetzner Robot Key Management](https://robot.your-server.de/key/index) having different names will not be
+updated nor removed. All keys from the [Hetzner Robot Key Management](https://robot.your-server.de/key/index) will be 
+provisioned on the target hosts.
+
+    hetzner_key_instances:
+      - name: New Key
+        data: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSkT3A1j89RT/540ghIMHXIVwNlAEM3WtmqVG7YN/wYwtsJ8iCszg4/lXQsfLFx\
+        YmEVe8L9atgtMGCi5QdYPl4X/c+5YxFfm88Yjfx+2xEgUdOr864eaI22yaNMQ0AlyilmK+PcSyxKP4dzkf6B5Nsw8lhfB5n9F5md6GHLLjOG\
+        uBbHYlesKJKnt2cMzzS90BdRk73qW6wJ+MCUWo+cyBFZVGOzrjJGEcHewOCbVs+IJWBFSi6w1enbKGc+RY9KrnzeDKWWqzYnNofiHGVFAuMx\
+        rmZOasqlTIKiC2UK3RmLxZicWiQmPnpnjJRo7pL0oYM9r/sIWzD6i2S9szDy6aZ"
+        state: absent
+        
+Add `state: absent` to remove the key from [Hetzner Robot Key Management](https://robot.your-server.de/key/index) and
+the target hosts.
+
+    hetzner_key_webservice_concurrent_requests: 1
+    hetzner_key_webservice_concurrent_poll: 1
+
+To speed up the role execution while handling the configuration for multiple keys, the number of parallel requests made to the Hetzner Robot API
+can be controlled by `hetzner_key_webservice_concurrent_requests` variable. The poll interval for asynchronous request
+result processing is set using `hetzner_key_webservice_concurrent_poll`. Check official documentation on
+[Asynchronous Actions and Polling](https://docs.ansible.com/ansible/latest/user_guide/playbooks_async.html) for more explanation. 
+
 ## Dependencies
 
 None.
