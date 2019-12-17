@@ -1,0 +1,35 @@
+---
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: ubuntu-16
+    image: ubuntu:16.04
+    dockerfile: ../resources/playbooks/Dockerfile.j2
+    groups:
+      - platforms
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      all:
+        hetzner_key_webservice_base_url: http://hetzner-robot:3000
+        hetzner_key_webservice_username: robot
+        hetzner_key_webservice_password: secret
+        hetzner_key_webservice_mock: nl2go/hetzner-robot-api-mock:1.4.0
+        hetzner_key_instances:
+          - name: Existing Key
+            data: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSkT3A1j89RT/540ghIMHXIVwNlAEM3WtmqVG7YN/wYwtsJ8iCszg4/lXQsfLFx\
+            YmEVe8L9atgtMGCi5QdYPl4X/c+5YxFfm88Yjfx+2xEgUdOr864eaI22yaNMQ0AlyilmK+PcSyxKP4dzkf6B5Nsw8lhfB5n9F5md6GHLLjOG\
+            uBbHYlesKJKnt2cMzzS90BdRk73qW6wJ+MCUWo+cyBFZVGOzrjJGEcHewOCbVs+IJWBFSi6w1enbKGc+RY9KrnzeDKWWqzYnNofiHGVFAuMx\
+            rmZOasqlTIKiC2UK3RmLxZicWiQmPnpnjJRo7pL0oYM9r/sIWzD6i2S9szDy6aY"
+  lint:
+    name: ansible-lint
+  playbooks:
+    converge: ../resources/playbooks/playbook.yml
+    cleanup: ../resources/playbooks/cleanup.yml
+verifier:
+  name: ansible
+  lint:
+    name: ansible-lint
