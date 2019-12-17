@@ -1,0 +1,29 @@
+---
+- name: Verify authorized_keys configuration
+  hosts: platforms
+  tasks:
+      - name: Get keys from webservice
+        uri:
+            url: "{{ hetzner_key_webservice_base_url }}/key"
+            method: GET
+            user: "{{ hetzner_key_webservice_username }}"
+            password: "{{ hetzner_key_webservice_password }}"
+            status_code: 200
+            force_basic_auth: yes
+        register: get_key_response
+        delegate_to: localhost
+      - name: Get authorized_keys file content
+        slurp:
+            src: "/root/.ssh/authorized_keys"
+        register: get_authorized_keys
+      - name: Set authorized_keys content
+        set_fact:
+            authorized_keys_content: "{{ get_authorized_keys['content'] | b64decode }}"
+      - name: Assert keys empty
+        assert:
+            that: get_key_response.json | length == 0
+            fail_msg: "Webservice returns non empty key list: {{ get_key_response.json }}"
+      - name: Assert keys not in authorized_keys
+        assert:
+            that: get_authorized_keys.content | length == 0
+            fail_msg: "authorized_keys is not empty: {{ get_authorized_keys.content }}"
