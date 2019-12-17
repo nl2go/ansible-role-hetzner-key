@@ -11,4 +11,4 @@
     user: root
     state: absent
     key: "{{ item.data }}"
-  with_items: "{{ hetzner_key_instances |  selectattr('state', 'equalto', 'absent') | list }}"
+  with_items: "{{ hetzner_key_instances |  selectattr('state', 'defined') | selectattr('state', 'equalto', 'absent') | list }}"
