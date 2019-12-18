@@ -1,7 +1,7 @@
 ---
 - include_tasks: key/main.yml
   tags:
-    - hetzner-key-key
+    - hetzner_key-key
 - include_tasks: host/main.yml
   tags:
-    - hetzner-key-host
+    - hetzner_key-host
