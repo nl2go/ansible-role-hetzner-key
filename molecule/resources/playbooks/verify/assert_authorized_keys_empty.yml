@@ -1,0 +1,9 @@
+---
+- name: Assert keys empty
+  assert:
+    that: get_key_response.json | length == 0
+    fail_msg: "Webservice returns non empty key list: {{ get_key_response.json }}"
+- name: Assert authorized_keys empty
+  assert:
+    that: get_authorized_keys.content | length == 0
+    fail_msg: "authorized_keys is not empty: {{ get_authorized_keys.content }}"

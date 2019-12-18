@@ -1,26 +1,8 @@
 ---
-- name: Verify authorized_keys configuration
+- name: Verify add_key scenario
   hosts: platforms
   tasks:
-    - name: Get keys from webservice
-      uri:
-        url: "{{ hetzner_key_webservice_base_url }}/key"
-        method: GET
-        user: "{{ hetzner_key_webservice_username }}"
-        password: "{{ hetzner_key_webservice_password }}"
-        status_code: 200
-        force_basic_auth: yes
-      register: get_key_response
-      delegate_to: localhost
-    - name: Get authorized_keys file content
-      slurp:
-        src: "/root/.ssh/authorized_keys"
-      register: get_authorized_keys
-    - name: Set authorized_keys content
-      set_fact:
-        authorized_keys_content: "{{ get_authorized_keys['content'] | b64decode }}"
-    - name: Assert keys in authorized_keys
-      assert:
-        that: item.key.data in authorized_keys_content
-        fail_msg: "{{ item.key.data }} is not in {{ authorized_keys_content }}."
-      with_items: "{{ get_key_response.json }}"
+    - name: Include get authorized_keys
+      include: ../resources/playbooks/verify/get_authorized_keys.yml
+    - name: Include assert authorized_keys
+      include: ../resources/playbooks/verify/assert_authorized_keys.yml

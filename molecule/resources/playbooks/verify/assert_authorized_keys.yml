@@ -1,0 +1,6 @@
+---
+- name: Assert keys in authorized_keys
+  assert:
+      that: item.key.data in authorized_keys_content
+      fail_msg: "{{ item.key.data }} is not in {{ authorized_keys_content }}."
+  with_items: "{{ get_key_response.json }}"
