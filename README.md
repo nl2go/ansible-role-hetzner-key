@@ -60,6 +60,13 @@ can be controlled by `hetzner_key_webservice_concurrent_requests` variable. The 
 result processing is set using `hetzner_key_webservice_concurrent_poll`. Check official documentation on
 [Asynchronous Actions and Polling](https://docs.ansible.com/ansible/latest/user_guide/playbooks_async.html) for more explanation. 
 
+## Tags
+
+Tags can be used to limit the role execution to a particular task module. Following tags are available:
+
+- `hetzner_key-key`: Manages access keys within [Hetzner Robot Key Management](https://robot.your-server.de/key/index).
+- `hetzner_key-host`: Configures access keys on the target hosts.
+
 ## Dependencies
 
 None.
