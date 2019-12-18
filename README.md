@@ -71,7 +71,7 @@ only, it may be run on localhost.
 
     - hosts: all
       roles:
-         - nl2go.hetzner-key
+         - nl2go.hetzner_key
               
 ## Development
 Use [docker-molecule](https://github.com/nl2go/docker-molecule) following the instructions to run [Molecule](https://molecule.readthedocs.io/en/stable/)

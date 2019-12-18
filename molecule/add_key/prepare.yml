@@ -1,6 +1,6 @@
 ---
-- name: Prepare Hetzner Robot Mock API
+- name: Prepare Hetzner Robot Mock API for add_key scenario
   hosts: localhost
   tasks:
-    - name: Run Hetzner Robot Mock API Container
-      shell: docker run -d --rm --network molecule --name hetzner-robot {{ hetzner_key_webservice_mock }}
+    - name: Include start Hetzner Robot Mock API
+      include: ../resources/playbooks/prepare/start_hetzner_robot_mock_api.yml
