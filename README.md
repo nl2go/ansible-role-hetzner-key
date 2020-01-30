@@ -71,8 +71,9 @@ result processing is set using `hetzner_key_webservice_concurrent_poll`. Check o
 
 Tags can be used to limit the role execution to a particular task module. Following tags are available:
 
-- `hetzner_key-key`: Manages access keys within [Hetzner Robot Key Management](https://robot.your-server.de/key/index).
-- `hetzner_key-host`: Configures access keys on the target hosts.
+- `hetzner_key`,`config`: Covers the full role lifecycle.
+- `hetzner_key_key`: Manages access keys within [Hetzner Robot Key Management](https://robot.your-server.de/key/index).
+- `hetzner_key_host`: Configures access keys on the target hosts.
 
 ## Dependencies
 
