@@ -1,5 +1,4 @@
 [![Travis (.org) branch](https://img.shields.io/travis/nl2go/ansible-role-hetzner-key/master)](https://travis-ci.org/nl2go/ansible-role-hetzner-key)
-[![Codecov](https://img.shields.io/codecov/c/github/nl2go/ansible-role-hetzner-key)](https://codecov.io/gh/nl2go/ansible-role-hetzner-key)
 [![Ansible Galaxy](https://img.shields.io/badge/role-nl2go.hetzner_key-blue.svg)](https://galaxy.ansible.com/nl2go/hetzner_key/)
 [![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/nl2go/ansible-role-hetzner-key)](https://galaxy.ansible.com/nl2go/hetzner_key)
 [![Ansible Galaxy Downloads](https://img.shields.io/ansible/role/d/45353.svg?color=blue)](https://galaxy.ansible.com/nl2go/hetzner_key/)
