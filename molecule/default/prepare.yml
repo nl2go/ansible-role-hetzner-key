@@ -6,3 +6,9 @@
       include: ../resources/playbooks/prepare/start_hetzner_robot_mock_api.yml
     - name: Include create key
       include: ../resources/playbooks/prepare/create_key.yml
+
+- name: Prepare controller
+  hosts: localhost
+  tasks:
+    - name: Prepare controller
+      include: ../resources/playbooks/prepare/controller.yml

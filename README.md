@@ -8,10 +8,16 @@
 
 An Ansible Role that manages [Hetzner Robot Keys](https://robot.your-server.de/key/index).
 
-## Requirements
+## Prerequisites
 
 - Existing [Hetzner Online GmbH Account](https://accounts.hetzner.com).
 - Configured [Hetzner Robot Webservice Account](https://robot.your-server.de/preferences).
+
+## Requirements
+
+| Name | Type | Version | Location |
+|---|---|---|---|
+| [ansible-filter](https://github.com/nl2go/ansible-filter) | Python package | 1.0.0 | Control node |
 
 ## Role Variables
 
