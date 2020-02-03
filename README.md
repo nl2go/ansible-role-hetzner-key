@@ -16,7 +16,7 @@ An Ansible Role that manages [Hetzner Robot Keys](https://robot.your-server.de/k
 
 | Name | Type | Version | Location |
 |---|---|---|---|
-| [ansible-filter](https://github.com/nl2go/ansible-filter) | Python package | 1.0.0 | Control node |
+| [ansible-filter](https://github.com/nl2go/ansible-filter) | Python package | 1.0.1 | Control node |
 
 ## Role Variables
 
