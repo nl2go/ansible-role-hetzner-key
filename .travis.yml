@@ -14,9 +14,11 @@ before_script:
 
 script:
   - docker-compose exec molecule molecule test --all
+  - coverage run --source=filter_plugins -m unittest discover filter_plugins/tests
 
 after_script:
   - docker-compose down
+  - codecov
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
